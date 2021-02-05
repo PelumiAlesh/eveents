@@ -1,0 +1,132 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body, html {
+  background-color: aliceblue !important;
+}
+.contain {
+  margin: 150px 10%;
+}
+.standout-row {
+  display: flex;
+  flex-wrap: wrap;
+  /*justify-content: space-between;*/
+}
+.standout-row .card {
+  margin-top: 30px;
+  margin-right: 40px;
+}
+.blue {
+  color: dodgerblue;
+}
+.mt-20 {
+  margin-top: 200px;
+}
+.table-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.panel {
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 0.2rem;
+  background-color: #F5F5F5;
+  color: #323B40;
+}
+.panel.panel-blue {
+  background-color: #E0F5FF;
+  color: #00A5FA;
+}
+.panel.panel-big-height {
+  min-height: 150px;
+}
+
+.item {
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+.item.item-blue {
+  background-color: #B9E5FE;
+  color: #00A5FA;
+}
+.item.item-green {
+  background-color: #B7E0DC;
+  color: #019888;
+}
+.item.item-lime {
+  background-color: #C7E8C8;
+  color: #42B045;
+}
+.item.item-yellow {
+  background-color: #FFEEBA;
+  color: #FF9901;
+}
+.item.item-pink {
+  background-color: #FABAD0;
+  color: #EF075F;
+}
+.item.item-red {
+  background-color: #FEC9C6;
+  color: #FD3D08;
+}
+.item.item-big-width {
+  min-width: 380px;
+}
+
+
+
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
