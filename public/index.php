@@ -106,11 +106,11 @@ if (isset($_POST['apply_event'])) {
 
     <script>
         function getCookie(cname) {
-            var name = cname + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var ca = decodedCookie.split(';');
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
             for(var i = 0; i <ca.length; i++) {
-                var c = ca[i];
+                let c = ca[i];
                 while (c.charAt(0) == ' ') {
                     c = c.substring(1);
                 }
@@ -130,10 +130,18 @@ if (isset($_POST['apply_event'])) {
             // After 3 seconds, remove the show class from DIV
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
-
+        function delete_cookie( name, path ) {
+            if( getCookie( name ) ) {
+                document.cookie = name + "=" +
+                    ((path) ? ";path="+path:"")+
+                    ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+            }
+        }
         if(getCookie('toast')){
             showToast()
-            document.cookie = "toast=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            console.log('got here', document.cookie);
+            delete_cookie('toast', '/')
+            console.log('DEL here', document.cookie);
         };
 
         $(document).ready(function() {
@@ -141,7 +149,7 @@ if (isset($_POST['apply_event'])) {
 
                 $('.view-btn').on('click', function (event) {
 
-                    const button = $(event.relatedTarget); /*Button that triggered the modal*/
+                    const button = $(event.relatedTarget);
                     const title = $(this).attr("data-eventName");
                     const desc = $(this).attr("data-desc");
                     const id = $(this).attr("data-id");

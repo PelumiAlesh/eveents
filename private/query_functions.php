@@ -1,12 +1,14 @@
 <?php
 
 
-  function fetch_all_events() {
+  function fetch_all_events($searchKeyword = '') {
   global $db;
 
 
-  $sql = "SELECT events.name, events.desc, events.id, events.created_at, result.types FROM ( SELECT events.id, GROUP_CONCAT(types.name) AS types FROM events INNER JOIN event_types ON events.id = event_types.event_id INNER JOIN type_events ON event_types.type_id = type_events.id INNER JOIN event_types AS has_types ON events.id = has_types.event_id INNER JOIN type_events AS types ON has_types.type_id = types.id GROUP BY events.id ) AS result INNER JOIN events USING(id);";
+  $sqlAll = "SELECT events.name, events.desc, events.id, events.created_at, result.types FROM ( SELECT events.id, GROUP_CONCAT(types.name) AS types FROM events INNER JOIN event_types ON events.id = event_types.event_id INNER JOIN type_events ON event_types.type_id = type_events.id INNER JOIN event_types AS has_types ON events.id = has_types.event_id INNER JOIN type_events AS types ON has_types.type_id = types.id GROUP BY events.id ) AS result INNER JOIN events USING(id);";
+  $sqlSearch = "SELECT events.name, events.desc, events.id, events.created_at, result.types FROM ( SELECT events.id, GROUP_CONCAT(types.name) AS types FROM events INNER JOIN event_types ON events.id = event_types.event_id INNER JOIN type_events ON event_types.type_id = type_events.id INNER JOIN event_types AS has_types ON events.id = has_types.event_id INNER JOIN type_events AS types ON has_types.type_id = types.id  WHERE events.name LIKE '%$searchKeyword%' GROUP BY events.id ) AS result INNER JOIN events USING(id);";
 
+  $sql = $searchKeyword ? $sqlSearch : $sqlAll;
   $result = mysqli_query($db, $sql);
   confirm_result_set($result, $sql);
   return $result;
@@ -159,7 +161,7 @@
     if($result) {
       $cookie_name = "toast";
       $cookie_message = "success";
-      setcookie($cookie_name, $cookie_message, time() + (1), "/");
+      setcookie($cookie_name, $cookie_message, time()+3);
 
       $to = "xyz@mailinator.com";
       $subject = "Eveents applied succesfully";
@@ -175,9 +177,9 @@
       $retval = mail($to, $subject, $message, $header);
 
       if ($retval == true) {
-        echo "Message sent successfully...";
+        return "Message sent successfully...";
       } else {
-        echo "Message could not be sent...";
+        return "Message could not be sent...";
       }
     } else {
       // INSERT failed
@@ -187,16 +189,16 @@
     }
   }
 
-function check_login_status() {
-  global  $db;
-  if ($_SESSION['id']) {
-    return true;
-  } else {
-    return false;
-  };
+  function check_login_status() {
+    global  $db;
+    if ($_SESSION['id']) {
+      return true;
+    } else {
+      return false;
+    };
 
 
-}
+  }
 ?>
 
 

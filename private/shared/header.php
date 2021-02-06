@@ -1,16 +1,16 @@
 <?php
-  if(!isset($page_title)) { $page_title = 'Staff Area'; }
-$logged_in = check_login_status();
 
-function runMyFunction()
-{
-    session_destroy();
-}
+    if(!isset($page_title)) { $page_title = 'Staff Area'; }
+    $logged_in = check_login_status();
 
-if (isset($_GET['logout'])) {
-    runMyFunction();
-}
 
+    function log_out_fnc() {
+        session_destroy();
+    }
+
+    if (isset($_GET['logout'])) {
+        log_out_fnc();
+    }
 ?>
 
 <!doctype html>
@@ -34,10 +34,10 @@ if (isset($_GET['logout'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-      <a class="navbar-brand" href="/index.php">Logo</a>
-      <form class="form-inline" action="/action_page.php">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-success" type="submit">Search</button>
+      <a class="navbar-brand" href="/index.php">Eveeents</a>
+      <form class="form-inline" action="/search.php" method="get">
+          <input class="form-control mr-sm-2" type="text" name="search_keyword" placeholder="Search">
+          <button class="btn btn-success" name="search" type="submit">Search</button>
       </form>
 
       <ul class="nav navbar-nav navbar-right">
