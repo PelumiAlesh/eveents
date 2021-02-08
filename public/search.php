@@ -4,22 +4,20 @@
 
 <?php
 
-$logged_in = check_login_status();
-
-function getTypes($typeString) {
-    $typeArray = explode(',',$typeString);
-    $intersectArray = array_unique($typeArray);
-    return implode(',', $intersectArray);
-}
-if (isset($_POST['apply_event'])) {
-    $id = $_POST['id_modal'];
-    $result = apply_to_event($id);
-}
-
-if (isset($_GET['search'])) {
-    $searchKeyword = $_GET['search_keyword'];
-    $events = fetch_all_events($searchKeyword);
-}
+    $logged_in = check_login_status();
+    function getTypes($typeString) {
+        $typeArray = explode(',',$typeString);
+        $intersectArray = array_unique($typeArray);
+        return implode(',', $intersectArray);
+    }
+    if (isset($_POST['apply_event'])) {
+        $id = $_POST['id_modal'];
+        $result = apply_to_event($id);
+    }
+    if (isset($_GET['search'])) {
+        $searchKeyword = $_GET['search_keyword'];
+        $events = fetch_all_events($searchKeyword);
+    }
 
 ?>
 

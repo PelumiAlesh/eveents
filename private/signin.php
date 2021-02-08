@@ -32,6 +32,7 @@ if(isset($_POST['login'])) {
                 $id            = $row['id'];
                 $username         = $row['username'];
                 $pass_word     = $row['password'];
+                $isAdmin     = $row['isAdmin'];
             }
 
             // Verify password
@@ -42,6 +43,7 @@ if(isset($_POST['login'])) {
 
                 $_SESSION['id'] = $id;
                 $_SESSION['email'] = $username;
+                $_SESSION['isAdmin'] = $isAdmin;
             } else {
                 $emailPwdErr = '<div class="alert alert-danger">
                               Either email or password is incorrect.

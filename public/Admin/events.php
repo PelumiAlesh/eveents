@@ -5,6 +5,21 @@
 $events = fetch_all_events();
 $event_type_list = fetch_types();
 $currentEvent = '';
+$logged_in = check_login_status();
+$is_admin = check_is_admin();
+
+if ($logged_in) {
+    if ($is_admin) {
+        return;
+    } else {
+        $auth_error = 'You are not allowed to view this page';
+        header("Location: /index.php");
+
+    }
+} else {
+    $auth_error = 'You are not logged in';
+    header("Location: /index.php");
+}
 
 
 if (isset($_POST['edit_event'])) {
@@ -36,6 +51,8 @@ function getTypes($typeString) {
 
 <?php $page_title = 'Home'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+
+
     <div class="contain">
         <div class="column">
             <div class="table-top">

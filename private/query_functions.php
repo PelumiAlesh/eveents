@@ -191,7 +191,24 @@
 
   function check_login_status() {
     global  $db;
-    if ($_SESSION['id']) {
+
+    try {
+      $result = $_SESSION['id'];
+      if ($result) {
+        return true;
+      } else {
+        return false;
+      };
+      return false;
+    } catch(Exception $e) {
+      return;
+    }
+
+
+  }
+  function check_is_admin() {
+    global  $db;
+    if ($_SESSION['isAdmin'] = 1) {
       return true;
     } else {
       return false;
